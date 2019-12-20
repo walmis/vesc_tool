@@ -138,7 +138,7 @@ VescInterface::VescInterface(QObject *parent) : QObject(parent)
     // TCP
     mTcpSocket = new QTcpSocket(this);
     mTcpConnected = false;
-
+    mTcpSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
     connect(mTcpSocket, SIGNAL(readyRead()), this, SLOT(tcpInputDataAvailable()));
     connect(mTcpSocket, SIGNAL(connected()), this, SLOT(tcpInputConnected()));
     connect(mTcpSocket, SIGNAL(disconnected()),

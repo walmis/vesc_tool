@@ -24,8 +24,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+//import android.app.NotificationChannel;
+//import android.app.NotificationManager;
 import android.os.Build;
 
 import vedder.vesctool.R;
@@ -72,44 +72,44 @@ public class VForegroundService extends Service {
 
     private void startForegroundService()
     {
-        // Create notification default intent.
-        Intent intent = new Intent();
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//        // Create notification default intent.
+//        Intent intent = new Intent();
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        Notification.Builder builder;
+//        Notification.Builder builder;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelId = "VESC_CHANNEL";
-            NotificationChannel channel = new NotificationChannel(channelId, "VESC", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("VESC GNSS");
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-            builder = new Notification.Builder(this, channelId);
-        } else {
-            builder = new Notification.Builder(this);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            String channelId = "VESC_CHANNEL";
+//            NotificationChannel channel = new NotificationChannel(channelId, "VESC", NotificationManager.IMPORTANCE_DEFAULT);
+//            channel.setDescription("VESC GNSS");
+//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//            builder = new Notification.Builder(this, channelId);
+//        } else {
+//            builder = new Notification.Builder(this);
+//        }
 
-        builder.setContentTitle("VESC Tool GNSS");
-        builder.setContentText("VESC Tool is keeping GNSS alive.");
+//        builder.setContentTitle("VESC Tool GNSS");
+//        builder.setContentText("VESC Tool is keeping GNSS alive.");
 
-        builder.setWhen(System.currentTimeMillis());
-        builder.setSmallIcon(R.drawable.icon);
+//        builder.setWhen(System.currentTimeMillis());
+//        builder.setSmallIcon(R.drawable.icon);
 
-//        builder.setFullScreenIntent(pendingIntent, true);
+////        builder.setFullScreenIntent(pendingIntent, true);
 
-        Intent stopIntent = new Intent(this, VForegroundService.class);
-        stopIntent.setAction(ACTION_STOP);
-        PendingIntent pendingPrevIntent = PendingIntent.getService(this, 0, stopIntent, 0);
-        Notification.Action prevAction = new Notification.Action(android.R.drawable.ic_media_pause, "Stop", pendingPrevIntent);
-        builder.addAction(prevAction);
+//        Intent stopIntent = new Intent(this, VForegroundService.class);
+//        stopIntent.setAction(ACTION_STOP);
+//        PendingIntent pendingPrevIntent = PendingIntent.getService(this, 0, stopIntent, 0);
+//        Notification.Action prevAction = new Notification.Action(android.R.drawable.ic_media_pause, "Stop", pendingPrevIntent);
+//        builder.addAction(prevAction);
 
-        startForeground(1, builder.build());
+//        startForeground(1, builder.build());
     }
 
     private void stopForegroundService()
     {
-        stopForeground(true);
-        stopSelf();
+//        stopForeground(true);
+//        stopSelf();
     }
 }
 

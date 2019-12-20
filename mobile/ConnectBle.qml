@@ -39,6 +39,8 @@ Item {
         contentWidth: parent.width
         clip: true
 
+
+
         GridLayout {
             id: grid
             anchors.fill: parent
@@ -53,6 +55,84 @@ Item {
                 Layout.preferredHeight: (sourceSize.height * Layout.preferredWidth) / sourceSize.width
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
                 source: "qrc:/res/logo_white.png"
+            }
+
+            GroupBox {
+                id: tcpConnBox
+                title: qsTr("TCP Connection")
+
+                Layout.fillWidth: true
+                Layout.columnSpan: 1
+
+                GridLayout {
+                    anchors.topMargin: -5
+                    anchors.bottomMargin: -5
+                    anchors.fill: parent
+
+                    clip: false
+                    visible: true
+                    rowSpacing: -10
+                    columnSpacing: 5
+                    rows: 5
+                    columns: 6
+
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.columnSpan: 5
+                        Layout.topMargin: 6
+                        Layout.bottomMargin: 6
+                        Layout.preferredWidth:500
+                        height: rtLogFileText.implicitHeight + 14
+                        border.width: 2
+                        border.color: "#8d8d8d"
+                        color: "#33a8a8a8"
+                        radius: 3
+
+                        TextInput {
+                            color: "white"
+                            id: tcpServer
+                            anchors.fill: parent
+                            anchors.margins: 7
+                            font.pointSize: 12
+                            text: VescIf.getLastTcpServer()
+                        }
+                    }
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.columnSpan: 1
+                        Layout.topMargin: 6
+                        Layout.bottomMargin: 6
+                        Layout.preferredWidth:100
+                        height: tcpPort.implicitHeight + 14
+                        border.width: 2
+                        border.color: "#8d8d8d"
+                        color: "#33a8a8a8"
+                        radius: 3
+
+                        TextInput {
+                            color: "white"
+                            id: tcpPort
+                            anchors.fill: parent
+                            anchors.margins: 7
+                            font.pointSize: 12
+                            text: VescIf.getLastTcpPort()
+                        }
+
+                    }
+
+                    Button {
+                        Layout.fillWidth: true
+                        Layout.preferredWidth:500
+                        Layout.columnSpan: 6
+                        text: "Connect"
+
+                        onClicked: {
+                            VescIf.connectTcp(tcpServer.text, parseInt(tcpPort.text))
+                        }
+                    }
+                }
             }
 
             GroupBox {
@@ -679,3 +759,9 @@ Item {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
